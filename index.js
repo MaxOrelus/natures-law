@@ -20,6 +20,8 @@
           return await fn(...args)
         } catch (error) {
           errorFn(error)
+          
+          return null
         }
       }
     }
@@ -29,6 +31,8 @@
         return fn(...args)
       } catch (error) {
         errorFn(error)
+
+        return null
       }
     }
   }
