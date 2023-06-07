@@ -1,0 +1,27 @@
+{
+  "name": "natures-law",
+  "version": "1.0.0",
+  "description": "A package that simplifies everything in javascript.",
+  "main": "dist/natures-law.universal.js",
+  "browser": "dist/natures-law.universal.js",
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "keywords": [
+    "natures",
+    "law"
+  ],
+  "author": {
+    "name": "Max Orelus",
+    "email": "max@maxorelus.com",
+    "url": "https://github.com/MaxOrelus/natures-law"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.22.1",
+    "@babel/preset-env": "^7.22.4",
+    "@rollup/plugin-babel": "^6.0.3",
+    "rollup": "^3.24.0",
+    "rollup-plugin-babel": "^4.4.0"
+  }
+}
