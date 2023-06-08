@@ -11,6 +11,8 @@
   }
 }(typeof self !== 'undefined' ? self : this, () => {
 
+  const nullFn = () => null;
+
   const naturesLaw = (fn, errorFn) => {
     const isAsync = fn[Symbol.toStringTag] === 'AsyncFunction';
 
@@ -20,8 +22,7 @@
           return await fn(...args)
         } catch (error) {
           errorFn(error)
-          
-          return null
+          return nullFn()
         }
       }
     }
@@ -31,8 +32,7 @@
         return fn(...args)
       } catch (error) {
         errorFn(error)
-
-        return null
+        return nullFn()
       }
     }
   }
