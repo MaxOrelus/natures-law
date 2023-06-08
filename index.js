@@ -13,6 +13,14 @@
 
   const nullFn = () => null;
 
+  const log = (fn) => {
+    return (str) => {
+      if (typeof str === 'string') {
+        console.log(`[natures-law][fn:${fn.name}] ${str}`);
+      }
+    }
+  }
+
   const naturesLaw = (fn, errorFn) => {
     const isAsync = fn[Symbol.toStringTag] === 'AsyncFunction';
 
@@ -21,7 +29,7 @@
         try {
           return await fn(...args)
         } catch (error) {
-          errorFn(error)
+          errorFn(error, log(fn))
           return nullFn()
         }
       }
@@ -31,7 +39,7 @@
       try {
         return fn(...args)
       } catch (error) {
-        errorFn(error)
+        errorFn(error, log(fn))
         return nullFn()
       }
     }
