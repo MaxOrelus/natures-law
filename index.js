@@ -16,7 +16,7 @@
   const log = (fn) => {
     return (str) => {
       if (typeof str === 'string') {
-        console.log(`[natures-law][fn:${fn.name}] ${str}`);
+        console.log(`[natures-law][fn:${fn.name ? fn.name : "anonymous"}] ${str}`);
       }
     }
   }

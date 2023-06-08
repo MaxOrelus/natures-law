@@ -1,7 +1,7 @@
 {
   "name": "natures-law",
-  "version": "1.0.7",
-  "description": "A package that simplifies everything in javascript.",
+  "version": "1.0.8",
+  "description": "A package that simplifies javascript.",
   "main": "dist/natures-law.universal.js",
   "browser": "dist/natures-law.universal.js",
   "scripts": {
