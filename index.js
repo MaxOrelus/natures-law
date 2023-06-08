@@ -29,7 +29,7 @@
         try {
           return await fn(...args)
         } catch (error) {
-          errorFn(error, log(fn))
+          errorFn(log(fn), error)
           return nullFn()
         }
       }
@@ -39,7 +39,7 @@
       try {
         return fn(...args)
       } catch (error) {
-        errorFn(error, log(fn))
+        errorFn(log(fn), error)
         return nullFn()
       }
     }
