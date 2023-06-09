@@ -11,39 +11,40 @@
   }
 }(typeof self !== 'undefined' ? self : this, () => {
 
-  const nullFn = () => null;
+  const freeze = Object.freeze;
+  const nullFn = freeze(() => null);
 
-  const log = (fn) => {
+  const log = freeze((fn) => {
     return (str) => {
       if (typeof str === 'string') {
-        console.log(`[natures-law][fn:${fn.name ? fn.name : "anonymous"}] ${str}`);
+        return console.log(`[natures-law][fn:${fn.name ? fn.name : "anonymous"}] ${str}`);
       }
     }
-  }
+  });
 
-  const naturesLaw = (fn, errorFn) => {
-    const isAsync = fn[Symbol.toStringTag] === 'AsyncFunction';
+  const naturesLaw = freeze((fn, errorFn) => {
+    const isAsync = freeze(fn[Symbol.toStringTag] === 'AsyncFunction');
 
     if (isAsync) {
-      return async (...args) => {
+      return freeze(async (...args) => {
         try {
-          return await fn(...args)
+          return freeze(await fn(...args))
         } catch (error) {
           errorFn(log(fn), error)
           return nullFn()
         }
-      }
+      });
     }
 
-    return (...args) => {
+    return freeze((...args) => {
       try {
-        return fn(...args)
+        return freeze(fn(...args))
       } catch (error) {
         errorFn(log(fn), error)
         return nullFn()
       }
-    }
-  }
+    });
+  });
 
   return naturesLaw;
 
