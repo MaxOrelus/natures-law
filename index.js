@@ -11,6 +11,7 @@
   }
 }(typeof self !== 'undefined' ? self : this, () => {
 
+  const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
   const freeze = Object.freeze;
   const nullFn = freeze(() => null);
 
@@ -22,10 +23,17 @@
     }
   });
 
-  const naturesLaw = freeze((fn, errorFn) => {
-    const isAsync = freeze(fn[Symbol.toStringTag] === 'AsyncFunction');
+  const law = freeze((fn, errorFn) => {
+    const is_form_async = freeze(fn[Symbol.toStringTag] === 'AsyncFunction');
+    const is_error_async = freeze(errorFn[Symbol.toStringTag] === 'AsyncFunction')
 
-    if (isAsync) {
+    if (is_error_async) {
+      return freeze(async () => {
+        throw new Error(`[natures-law][fn:${fn.name ? fn.name : "anonymous"}] Async function detected in natures-error. A moment only happens once. Potential is either fulfilled or wasted. Use this area to train your mind to be more aware of the potential of your code.`)
+      });
+    }
+
+    if (is_form_async) {
       return freeze(async (...args) => {
         try {
           return freeze(await fn(...args))
@@ -46,6 +54,33 @@
     });
   });
 
-  return naturesLaw;
+  const retry = freeze(async (law, seed, max_retries = 3, delay_ms = 1000) => {
+    var retries = 0;
+
+    while (retries < max_retries) {
+      try {
+        var potential = await law(seed);
+
+        if (potential !== null) {
+          return potential;
+        }
+        retries++;
+
+        await delay(delay_ms);
+      } catch (error) {
+        console.log(`[natures-law][retry] only accepts natures-law wrapped functions`);
+        return nullFn();
+      }
+    }
+
+    return nullFn();
+  });
+
+  const nature = freeze({
+    law,
+    retry
+  });
+
+  return nature;
 
 }));
